@@ -1,0 +1,295 @@
+Dataset loading
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+data = pd.read_csv('C:/Users/Hari/Downloads/Churn_Modelling.csv')
+data.head()
+RowNumber	CustomerId	Surname	CreditScore	Geography	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited
+0	1	15634602	Hargrave	619	France	Female	42	2	0.00	1	1	1	101348.88	1
+1	2	15647311	Hill	608	Spain	Female	41	1	83807.86	1	0	1	112542.58	0
+2	3	15619304	Onio	502	France	Female	42	8	159660.80	3	1	0	113931.57	1
+3	4	15701354	Boni	699	France	Female	39	1	0.00	2	0	0	93826.63	0
+4	5	15737888	Mitchell	850	Spain	Female	43	2	125510.82	1	1	1	79084.10	0
+Visualizations
+Univariate Analysis
+sns.displot(data.CreditScore)
+<seaborn.axisgrid.FacetGrid at 0x21eb3038470>
+
+sns.displot(data.Age)
+<seaborn.axisgrid.FacetGrid at 0x21eb1cdbd30>
+
+sns.displot(data.Tenure)
+<seaborn.axisgrid.FacetGrid at 0x21eb305c748>
+
+Bi-Variate Analysis
+sns.lineplot(x=data.NumOfProducts, y=data.HasCrCard)
+<AxesSubplot:xlabel='NumOfProducts', ylabel='HasCrCard'>
+
+sns.lineplot(x=data.Age, y=data.Tenure)
+<AxesSubplot:xlabel='Age', ylabel='Tenure'>
+
+sns.lineplot(data.Age,data.CreditScore)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='Age', ylabel='CreditScore'>
+
+sns.scatterplot(data.Age,data.CreditScore)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='Age', ylabel='CreditScore'>
+
+sns.lineplot(data.Tenure,data.Balance)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='Tenure', ylabel='Balance'>
+
+sns.scatterplot(data.Tenure,data.Balance)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='Tenure', ylabel='Balance'>
+
+sns.lineplot(data.CreditScore,data.Balance)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='CreditScore', ylabel='Balance'>
+
+sns.scatterplot(data.CreditScore,data.Balance)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='CreditScore', ylabel='Balance'>
+
+plt.pie(data.HasCrCard.value_counts(),[0.2,0],labels=['YES','NO'],autopct="%1.1f%%",colors=['green','red'])
+plt.title('HasCrCard')
+Text(0.5, 1.0, 'HasCrCard')
+
+data.HasCrCard.value_counts()
+1    7055
+0    2945
+Name: HasCrCard, dtype: int64
+sns.barplot(data.Geography.value_counts().index,data.Geography.value_counts())
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:ylabel='Geography'>
+
+sns.barplot(data.Gender.value_counts().index,data.Gender.value_counts())
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:ylabel='Gender'>
+
+Multi-Variate Analysis
+data.hist(figsize=(15,15))
+array([[<AxesSubplot:title={'center':'RowNumber'}>,
+        <AxesSubplot:title={'center':'CustomerId'}>,
+        <AxesSubplot:title={'center':'CreditScore'}>],
+       [<AxesSubplot:title={'center':'Age'}>,
+        <AxesSubplot:title={'center':'Tenure'}>,
+        <AxesSubplot:title={'center':'Balance'}>],
+       [<AxesSubplot:title={'center':'NumOfProducts'}>,
+        <AxesSubplot:title={'center':'HasCrCard'}>,
+        <AxesSubplot:title={'center':'IsActiveMember'}>],
+       [<AxesSubplot:title={'center':'EstimatedSalary'}>,
+        <AxesSubplot:title={'center':'Exited'}>, <AxesSubplot:>]],
+      dtype=object)
+
+sns.pairplot(data)
+<seaborn.axisgrid.PairGrid at 0x21eb40abc88>
+
+plt.pie(data.Geography.value_counts(),[0,0.1,0.3],shadow=True,labels=['France','Germany','Spain'],autopct="%1.1f%%")
+plt.title('Geography')
+Text(0.5, 1.0, 'Geography')
+
+Descriptive statistics on the dataset
+data.describe()
+RowNumber	CustomerId	CreditScore	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited
+count	10000.00000	1.000000e+04	10000.000000	10000.000000	10000.000000	10000.000000	10000.000000	10000.00000	10000.000000	10000.000000	10000.000000
+mean	5000.50000	1.569094e+07	650.528800	38.921800	5.012800	76485.889288	1.530200	0.70550	0.515100	100090.239881	0.203700
+std	2886.89568	7.193619e+04	96.653299	10.487806	2.892174	62397.405202	0.581654	0.45584	0.499797	57510.492818	0.402769
+min	1.00000	1.556570e+07	350.000000	18.000000	0.000000	0.000000	1.000000	0.00000	0.000000	11.580000	0.000000
+25%	2500.75000	1.562853e+07	584.000000	32.000000	3.000000	0.000000	1.000000	0.00000	0.000000	51002.110000	0.000000
+50%	5000.50000	1.569074e+07	652.000000	37.000000	5.000000	97198.540000	1.000000	1.00000	1.000000	100193.915000	0.000000
+75%	7500.25000	1.575323e+07	718.000000	44.000000	7.000000	127644.240000	2.000000	1.00000	1.000000	149388.247500	0.000000
+max	10000.00000	1.581569e+07	850.000000	92.000000	10.000000	250898.090000	4.000000	1.00000	1.000000	199992.480000	1.000000
+data.Geography.unique()
+array(['France', 'Spain', 'Germany'], dtype=object)
+data.Gender.value_counts()
+Male      5457
+Female    4543
+Name: Gender, dtype: int64
+data.Geography.value_counts()
+France     5014
+Germany    2509
+Spain      2477
+Name: Geography, dtype: int64
+Handling the missing data and outliers
+sns.boxplot(data.CreditScore)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='CreditScore'>
+
+q1=data.CreditScore.quantile(0.25)  
+q3=data.CreditScore.quantile(0.75)
+
+IQR=q3-q1
+
+upper_limit= q3 + 1.5*IQR
+lower_limit= q1 - 1.5*IQR
+print("Upper limit :",upper_limit)
+print("Lower limit :",lower_limit)
+Upper limit : 919.0
+Lower limit : 383.0
+data.median()
+RowNumber          5.000500e+03
+CustomerId         1.569074e+07
+CreditScore        6.520000e+02
+Age                3.700000e+01
+Tenure             5.000000e+00
+Balance            9.719854e+04
+NumOfProducts      1.000000e+00
+HasCrCard          1.000000e+00
+IsActiveMember     1.000000e+00
+EstimatedSalary    1.001939e+05
+Exited             0.000000e+00
+dtype: float64
+data['CreditScore']= np.where(data['CreditScore']<lower_limit,6.520000e+02,data['CreditScore'])
+sns.boxplot(data.CreditScore)
+c:\users\hari\appdata\local\programs\python\python36\lib\site-packages\seaborn\_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+<AxesSubplot:xlabel='CreditScore'>
+
+Label Encoding
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data.Gender=le.fit_transform(data.Gender)
+data.head(10)
+RowNumber	CustomerId	Surname	CreditScore	Geography	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited
+0	1	15634602	Hargrave	619.0	France	0	42	2	0.00	1	1	1	101348.88	1
+1	2	15647311	Hill	608.0	Spain	0	41	1	83807.86	1	0	1	112542.58	0
+2	3	15619304	Onio	502.0	France	0	42	8	159660.80	3	1	0	113931.57	1
+3	4	15701354	Boni	699.0	France	0	39	1	0.00	2	0	0	93826.63	0
+4	5	15737888	Mitchell	850.0	Spain	0	43	2	125510.82	1	1	1	79084.10	0
+5	6	15574012	Chu	645.0	Spain	1	44	8	113755.78	2	1	0	149756.71	1
+6	7	15592531	Bartlett	822.0	France	1	50	7	0.00	2	1	1	10062.80	0
+7	8	15656148	Obinna	652.0	Germany	0	29	4	115046.74	4	1	0	119346.88	1
+8	9	15792365	He	501.0	France	1	44	4	142051.07	2	0	1	74940.50	0
+9	10	15592389	H?	684.0	France	1	27	2	134603.88	1	1	1	71725.73	0
+One hot encoding
+data_main=pd.get_dummies(data,columns=['Geography'])
+data_main.head(15)
+RowNumber	CustomerId	Surname	CreditScore	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited	Geography_France	Geography_Germany	Geography_Spain
+0	1	15634602	Hargrave	619.0	0	42	2	0.00	1	1	1	101348.88	1	1	0	0
+1	2	15647311	Hill	608.0	0	41	1	83807.86	1	0	1	112542.58	0	0	0	1
+2	3	15619304	Onio	502.0	0	42	8	159660.80	3	1	0	113931.57	1	1	0	0
+3	4	15701354	Boni	699.0	0	39	1	0.00	2	0	0	93826.63	0	1	0	0
+4	5	15737888	Mitchell	850.0	0	43	2	125510.82	1	1	1	79084.10	0	0	0	1
+5	6	15574012	Chu	645.0	1	44	8	113755.78	2	1	0	149756.71	1	0	0	1
+6	7	15592531	Bartlett	822.0	1	50	7	0.00	2	1	1	10062.80	0	1	0	0
+7	8	15656148	Obinna	652.0	0	29	4	115046.74	4	1	0	119346.88	1	0	1	0
+8	9	15792365	He	501.0	1	44	4	142051.07	2	0	1	74940.50	0	1	0	0
+9	10	15592389	H?	684.0	1	27	2	134603.88	1	1	1	71725.73	0	1	0	0
+10	11	15767821	Bearce	528.0	1	31	6	102016.72	2	0	0	80181.12	0	1	0	0
+11	12	15737173	Andrews	497.0	1	24	3	0.00	2	1	0	76390.01	0	0	0	1
+12	13	15632264	Kay	476.0	0	34	10	0.00	2	1	0	26260.98	0	1	0	0
+13	14	15691483	Chin	549.0	0	25	5	0.00	2	0	0	190857.79	0	1	0	0
+14	15	15600882	Scott	635.0	0	35	7	0.00	2	1	1	65951.65	0	0	0	1
+data_main.corr()
+RowNumber	CustomerId	CreditScore	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited	Geography_France	Geography_Germany	Geography_Spain
+RowNumber	1.000000	0.004202	0.005136	0.018196	0.000783	-0.006495	-0.009067	0.007246	0.000599	0.012044	-0.005988	-0.016571	0.008590	-0.000044	-0.009905
+CustomerId	0.004202	1.000000	0.007246	-0.002641	0.009497	-0.014883	-0.012419	0.016972	-0.014025	0.001665	0.015271	-0.006248	-0.004049	-0.003097	0.007800
+CreditScore	0.005136	0.007246	1.000000	-0.003613	-0.001992	-0.000650	0.007074	0.012293	-0.003942	0.023596	0.001619	-0.018298	-0.009889	0.005748	0.005681
+Gender	0.018196	-0.002641	-0.003613	1.000000	-0.027544	0.014733	0.012087	-0.021859	0.005766	0.022544	-0.008112	-0.106512	0.006772	-0.024628	0.016889
+Age	0.000783	0.009497	-0.001992	-0.027544	1.000000	-0.009997	0.028308	-0.030680	-0.011721	0.085472	-0.007201	0.285323	-0.039208	0.046897	-0.001685
+Tenure	-0.006495	-0.014883	-0.000650	0.014733	-0.009997	1.000000	-0.012254	0.013444	0.022583	-0.028362	0.007784	-0.014001	-0.002848	-0.000567	0.003868
+Balance	-0.009067	-0.012419	0.007074	0.012087	0.028308	-0.012254	1.000000	-0.304180	-0.014858	-0.010084	0.012797	0.118533	-0.231329	0.401110	-0.134892
+NumOfProducts	0.007246	0.016972	0.012293	-0.021859	-0.030680	0.013444	-0.304180	1.000000	0.003183	0.009612	0.014204	-0.047820	0.001230	-0.010419	0.009039
+HasCrCard	0.000599	-0.014025	-0.003942	0.005766	-0.011721	0.022583	-0.014858	0.003183	1.000000	-0.011866	-0.009933	-0.007138	0.002467	0.010577	-0.013480
+IsActiveMember	0.012044	0.001665	0.023596	0.022544	0.085472	-0.028362	-0.010084	0.009612	-0.011866	1.000000	-0.011421	-0.156128	0.003317	-0.020486	0.016732
+EstimatedSalary	-0.005988	0.015271	0.001619	-0.008112	-0.007201	0.007784	0.012797	0.014204	-0.009933	-0.011421	1.000000	0.012097	-0.003332	0.010297	-0.006482
+Exited	-0.016571	-0.006248	-0.018298	-0.106512	0.285323	-0.014001	0.118533	-0.047820	-0.007138	-0.156128	0.012097	1.000000	-0.104955	0.173488	-0.052667
+Geography_France	0.008590	-0.004049	-0.009889	0.006772	-0.039208	-0.002848	-0.231329	0.001230	0.002467	0.003317	-0.003332	-0.104955	1.000000	-0.580359	-0.575418
+Geography_Germany	-0.000044	-0.003097	0.005748	-0.024628	0.046897	-0.000567	0.401110	-0.010419	0.010577	-0.020486	0.010297	0.173488	-0.580359	1.000000	-0.332084
+Geography_Spain	-0.009905	0.007800	0.005681	0.016889	-0.001685	0.003868	-0.134892	0.009039	-0.013480	0.016732	-0.006482	-0.052667	-0.575418	-0.332084	1.000000
+plt.figure(figsize=(15,8))
+sns.heatmap(data_main.corr(),annot=True,cmap="YlGnBu")
+<AxesSubplot:>
+
+data_main.corr().Exited.sort_values(ascending=False)
+Exited               1.000000
+Age                  0.285323
+Geography_Germany    0.173488
+Balance              0.118533
+EstimatedSalary      0.012097
+CustomerId          -0.006248
+HasCrCard           -0.007138
+Tenure              -0.014001
+RowNumber           -0.016571
+CreditScore         -0.018298
+NumOfProducts       -0.047820
+Geography_Spain     -0.052667
+Geography_France    -0.104955
+Gender              -0.106512
+IsActiveMember      -0.156128
+Name: Exited, dtype: float64
+data_main.head()
+RowNumber	CustomerId	Surname	CreditScore	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited	Geography_France	Geography_Germany	Geography_Spain
+0	1	15634602	Hargrave	619.0	0	42	2	0.00	1	1	1	101348.88	1	1	0	0
+1	2	15647311	Hill	608.0	0	41	1	83807.86	1	0	1	112542.58	0	0	0	1
+2	3	15619304	Onio	502.0	0	42	8	159660.80	3	1	0	113931.57	1	1	0	0
+3	4	15701354	Boni	699.0	0	39	1	0.00	2	0	0	93826.63	0	1	0	0
+4	5	15737888	Mitchell	850.0	0	43	2	125510.82	1	1	1	79084.10	0	0	0	1
+Spilting of data for Training and Testing
+Dependent variable
+y=data_main['Exited']
+print(y)
+0       1
+1       0
+2       1
+3       0
+4       0
+       ..
+9995    0
+9996    0
+9997    1
+9998    1
+9999    0
+Name: Exited, Length: 10000, dtype: int64
+independent variable
+X=data_main.drop(columns=['Exited'],axis=1)
+X.head(10)
+RowNumber	CustomerId	Surname	CreditScore	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Geography_France	Geography_Germany	Geography_Spain
+0	1	15634602	Hargrave	619.0	0	42	2	0.00	1	1	1	101348.88	1	0	0
+1	2	15647311	Hill	608.0	0	41	1	83807.86	1	0	1	112542.58	0	0	1
+2	3	15619304	Onio	502.0	0	42	8	159660.80	3	1	0	113931.57	1	0	0
+3	4	15701354	Boni	699.0	0	39	1	0.00	2	0	0	93826.63	1	0	0
+4	5	15737888	Mitchell	850.0	0	43	2	125510.82	1	1	1	79084.10	0	0	1
+5	6	15574012	Chu	645.0	1	44	8	113755.78	2	1	0	149756.71	0	0	1
+6	7	15592531	Bartlett	822.0	1	50	7	0.00	2	1	1	10062.80	1	0	0
+7	8	15656148	Obinna	652.0	0	29	4	115046.74	4	1	0	119346.88	0	1	0
+8	9	15792365	He	501.0	1	44	4	142051.07	2	0	1	74940.50	1	0	0
+9	10	15592389	H?	684.0	1	27	2	134603.88	1	1	1	71725.73	1	0	0
+Scaling
+from sklearn.preprocessing import scale
+x_scaled=pd.DataFrame(X,columns=X.columns)
+x_scaled.head(10)
+RowNumber	CustomerId	Surname	CreditScore	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Geography_France	Geography_Germany	Geography_Spain
+0	1	15634602	Hargrave	619.0	0	42	2	0.00	1	1	1	101348.88	1	0	0
+1	2	15647311	Hill	608.0	0	41	1	83807.86	1	0	1	112542.58	0	0	1
+2	3	15619304	Onio	502.0	0	42	8	159660.80	3	1	0	113931.57	1	0	0
+3	4	15701354	Boni	699.0	0	39	1	0.00	2	0	0	93826.63	1	0	0
+4	5	15737888	Mitchell	850.0	0	43	2	125510.82	1	1	1	79084.10	0	0	1
+5	6	15574012	Chu	645.0	1	44	8	113755.78	2	1	0	149756.71	0	0	1
+6	7	15592531	Bartlett	822.0	1	50	7	0.00	2	1	1	10062.80	1	0	0
+7	8	15656148	Obinna	652.0	0	29	4	115046.74	4	1	0	119346.88	0	1	0
+8	9	15792365	He	501.0	1	44	4	142051.07	2	0	1	74940.50	1	0	0
+9	10	15592389	H?	684.0	1	27	2	134603.88	1	1	1	71725.73	1	0	0
+Train Test Split
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test = train_test_split(x_scaled,y,test_size=0.3,random_state=0)
+X_train.shape
+(7000, 15)
+y_train.shape
+(7000,)
+X_test.shape
+(3000, 15)
+y_test.shape
+(3000,)
